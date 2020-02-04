@@ -13,8 +13,6 @@ jobs:
       - run: pip install --upgrade pip --user
       - run: pip3 install -r requirements.txt
       - run: |
-          psql -d $TEST_DATABASE_URL -c "CREATE EXTENSION IF NOT EXISTS "uuid-ossp";"
-      - run: |
           psql -d $TEST_DATABASE_URL -c "CREATE TABLE test (id char(40), first_name char(25),  last_name char(25), email_address char(22), password char(20), account_created timestamp, account_updated timestamp);"
       - run: |
           psql -d $TEST_DATABASE_URL -c "INSERT INTO test VALUES (uuid_generate_v4(), 'Maeve', 'Wile', 'maeve@wiley.com', 'Maeve$Wiley123', now(), now()), (uuid_generate_v4(), 'Jenny', 'Lopez', 'jenny@lopez.com', 'Jenny$Lopez123', now(), now());"
